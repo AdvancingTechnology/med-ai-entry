@@ -1,26 +1,28 @@
 
-import DoctorProfile from "@/components/DoctorProfile";
-import PatientSummaryCard from "@/components/PatientSummaryCard";
-import DoctorNotes from "@/components/DoctorNotes";
-import AssistantActivityLog from "@/components/AssistantActivityLog";
-import AssistantControls from "@/components/AssistantControls";
-import PatientDataReview from "@/components/PatientDataReview";
+import SidebarNavigation from "@/components/SidebarNavigation";
+import LiveSessionsPanel from "@/components/LiveSessionsPanel";
+import RecentIntakesCard from "@/components/RecentIntakesCard";
+import StartAISessionButton from "@/components/StartAISessionButton";
 
 const DoctorDashboard = () => {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-2 py-6">
-      <div className="w-full max-w-5xl flex flex-col gap-8 md:gap-6 md:flex-row">
-        {/* Left panel: Doctor Profile + Quick patient summary + Notes */}
-        <div className="flex flex-col gap-6 md:w-1/3 min-w-[260px]">
-          <DoctorProfile />
-          <PatientSummaryCard />
-          <DoctorNotes />
+    <div className="min-h-screen flex w-full bg-white">
+      {/* Sidebar */}
+      <div className="w-64 hidden md:block">
+        <SidebarNavigation />
+      </div>
+      {/* Main content */}
+      <div className="flex-1 flex flex-col px-4 py-8 max-w-5xl mx-auto">
+        {/* Responsive sidebar show/hide button could be added for mobile */}
+        {/* Greeting header */}
+        <h1 className="text-2xl md:text-3xl font-bold text-softblue-800 mb-6">Welcome back, Dr. James</h1>
+        {/* Grid layout for panels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <LiveSessionsPanel />
+          <RecentIntakesCard />
         </div>
-        {/* Main panel: Assistant admin panels */}
-        <div className="flex-1 md:w-2/3 flex flex-col gap-5">
-          <AssistantControls />
-          <AssistantActivityLog />
-          <PatientDataReview />
+        <div className="w-full md:w-1/2 mt-3">
+          <StartAISessionButton />
         </div>
       </div>
     </div>
