@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import DoctorDashboard from "./pages/DoctorDashboard";
-import IntakeForm from "./pages/IntakeForm";
 import IntakeReview from "./pages/IntakeReview";
 import ScheduleVoiceCall from "./pages/ScheduleVoiceCall";
 import Settings from "./pages/Settings";
@@ -22,7 +21,6 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/dashboard" element={<DoctorDashboard />} />
-          <Route path="/intake" element={<IntakeForm />} />
           <Route path="/intake-review" element={<IntakeReview />} />
           <Route path="/schedule-call" element={<ScheduleVoiceCall />} />
           <Route path="/settings" element={<Settings />} />
