@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   Sidebar,
@@ -10,13 +9,18 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Users, Bell, Settings } from "lucide-react";
+import { LayoutDashboard, Users, Bell, Settings, SquareArrowUp } from "lucide-react";
 
 const items = [
   {
     title: "Dashboard",
     url: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "AI Training Dashboard",
+    url: "/train-dashboard",
+    icon: SquareArrowUp,
   },
   {
     title: "Patients",

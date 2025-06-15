@@ -10,6 +10,7 @@ import IntakeReview from "./pages/IntakeReview";
 import ScheduleVoiceCall from "./pages/ScheduleVoiceCall";
 import Settings from "./pages/Settings";
 import AiTraining from "./pages/AiTraining";
+import TrainingDashboard from "./pages/TrainingDashboard";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/schedule-call" element={<ScheduleVoiceCall />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/train-ai" element={<AiTraining />} />
+          <Route path="/train-dashboard" element={<TrainingDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
