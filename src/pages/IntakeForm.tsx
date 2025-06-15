@@ -90,7 +90,7 @@ const IntakeForm = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-softblue px-2 py-8">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl p-8 md:p-10 flex flex-col gap-5 md:gap-7">
         <h1 className="text-2xl md:text-3xl font-bold text-softblue-800 font-sans text-center mb-2">
-          New Patient Intake Form
+          Patient Intake Form
         </h1>
         <form className="flex flex-col gap-5" onSubmit={handleSubmit} autoComplete="off">
           {/* Patient Name */}
@@ -172,6 +172,21 @@ const IntakeForm = () => {
               rows={3}
               required
               className="bg-softblue-200 focus:bg-white text-lg min-h-[80px]"
+            />
+          </div>
+          {/* Prescriptions */}
+          <div>
+            <Label htmlFor="prescriptions" className="block text-base text-softblue-800 font-medium mb-1">
+              Current Prescriptions
+            </Label>
+            <Textarea
+              id="prescriptions"
+              name="prescriptions"
+              value={form.prescriptions || ""}
+              onChange={handleInput}
+              placeholder="List any current prescription medications (optional)"
+              rows={2}
+              className="bg-softblue-200 focus:bg-white text-lg min-h-[60px]"
             />
           </div>
           {/* Medical History */}
