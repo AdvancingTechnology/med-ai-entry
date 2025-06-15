@@ -1,18 +1,16 @@
+
 import SidebarNavigation from "@/components/SidebarNavigation";
 import LiveSessionsPanel from "@/components/LiveSessionsPanel";
 import RecentIntakesCard from "@/components/RecentIntakesCard";
 import StartAISessionButton from "@/components/StartAISessionButton";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import MainMenuBar from "@/components/MainMenuBar";
+
+// Removed MainMenuBar from use
 
 const DoctorDashboard = () => {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full bg-white">
-        {/* Main menu at the top */}
-        <div className="fixed top-0 left-0 right-0 z-30">
-          <MainMenuBar />
-        </div>
         {/* Sidebar */}
         <div className="w-64 hidden md:block pt-12">
           <SidebarNavigation />
@@ -35,3 +33,4 @@ const DoctorDashboard = () => {
 };
 
 export default DoctorDashboard;
+
