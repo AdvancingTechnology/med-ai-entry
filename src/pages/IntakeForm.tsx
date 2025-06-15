@@ -26,6 +26,7 @@ const IntakeForm = () => {
     age: "",
     contact: "",
     symptoms: "",
+    prescriptions: "", // <-- ADDED
     insurance: "",
     history: [] as string[],
     historyText: ""
@@ -78,6 +79,7 @@ const IntakeForm = () => {
       age: "",
       contact: "",
       symptoms: "",
+      prescriptions: "", // <-- ADDED
       insurance: "",
       history: [],
       historyText: ""
