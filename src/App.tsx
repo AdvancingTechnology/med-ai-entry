@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import ScheduleVoiceCall from "./pages/ScheduleVoiceCall";
 import Settings from "./pages/Settings";
 import AiTraining from "./pages/AiTraining";
 import TrainingDashboard from "./pages/TrainingDashboard";
+import VoiceTraining from "./pages/VoiceTraining";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,7 @@ const App = () => (
           <Route path="/settings" element={<Settings />} />
           <Route path="/train-ai" element={<AiTraining />} />
           <Route path="/train-dashboard" element={<TrainingDashboard />} />
+          <Route path="/voice-training" element={<VoiceTraining />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
