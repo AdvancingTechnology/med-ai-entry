@@ -153,7 +153,7 @@ export default function TrainingDashboard() {
               </Button>
               <Button
                 className="bg-green-600 hover:bg-green-700 w-full rounded-lg text-white font-semibold flex items-center justify-center gap-2"
-                onClick={() => navigate("/scenario-setup")}
+                onClick={() => navigate("/telemedicine-setup")}
               >
                 <Video /> Telemedicine
               </Button>

@@ -14,6 +14,7 @@ import AiTraining from "./pages/AiTraining";
 import TrainingDashboard from "./pages/TrainingDashboard";
 import VoiceTraining from "./pages/VoiceTraining";
 import ScenarioSetup from "./pages/ScenarioSetup";
+import TelemedicineSetup from "./pages/TelemedicineSetup";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/train-dashboard" element={<TrainingDashboard />} />
           <Route path="/voice-training" element={<VoiceTraining />} />
           <Route path="/scenario-setup" element={<ScenarioSetup />} />
+          <Route path="/telemedicine-setup" element={<TelemedicineSetup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
