@@ -13,6 +13,7 @@ import Settings from "./pages/Settings";
 import AiTraining from "./pages/AiTraining";
 import TrainingDashboard from "./pages/TrainingDashboard";
 import VoiceTraining from "./pages/VoiceTraining";
+import ScenarioSetup from "./pages/ScenarioSetup";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/train-ai" element={<AiTraining />} />
           <Route path="/train-dashboard" element={<TrainingDashboard />} />
           <Route path="/voice-training" element={<VoiceTraining />} />
+          <Route path="/scenario-setup" element={<ScenarioSetup />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
