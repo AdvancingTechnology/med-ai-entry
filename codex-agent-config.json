@@ -1,0 +1,14 @@
+{
+    "code_execution": {
+      "environment": "node",         
+      "setup_commands": [
+        "npm install",              
+        "npm run lint"              
+      ],
+      "test_commands": [
+        "npm test",                 
+        "npm run format"
+      ],
+      "working_directory": "./"
+    }
+}
