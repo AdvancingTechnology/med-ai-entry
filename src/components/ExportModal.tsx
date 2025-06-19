@@ -10,66 +10,55 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
+import { useWebhookIntegration } from "@/hooks/useWebhookIntegration";
 
 interface ExportModalProps {
   isOpen: boolean;
   onClose: () => void;
+  sessionData?: any;
 }
 
 const emrTargets = [
   {
     id: "athena",
     name: "Athena Health",
-    description: "Export directly to Athena Health EMR system with full integration support.",
+    description: "Export directly to Athena Health EMR system with full integration support and FHIR formatting.",
   },
   {
     id: "cerner",
     name: "Cerner",
-    description: "Export to Cerner EMR with compatible formatting and data mapping.",
+    description: "Export to Cerner EMR with compatible formatting and data mapping for seamless integration.",
   },
   {
     id: "custom",
     name: "Custom API",
-    description: "Export to your custom API endpoint with configurable data format.",
+    description: "Export to your custom API endpoint with configurable data format and webhook support.",
   },
 ];
 
-const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose }) => {
+const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, sessionData }) => {
   const [selectedTarget, setSelectedTarget] = useState<string>("");
   const [isExporting, setIsExporting] = useState(false);
-  const { toast } = useToast();
+  const { sendToExportWebhook } = useWebhookIntegration();
 
   const handleExport = async () => {
     if (!selectedTarget) {
-      toast({
-        title: "Selection Required",
-        description: "Please select an EMR target before exporting.",
-        variant: "destructive",
-      });
       return;
     }
 
     setIsExporting(true);
     
-    // Simulate export process
     try {
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      toast({
-        title: "Export Successful!",
-        description: `Data exported to ${emrTargets.find(t => t.id === selectedTarget)?.name} successfully.`,
-        variant: "default",
+      await sendToExportWebhook({
+        target: selectedTarget,
+        sessionData: sessionData || {},
+        exportType: 'emr',
       });
       
       onClose();
       setSelectedTarget("");
     } catch (error) {
-      toast({
-        title: "Export Failed",
-        description: "Export failed. Please try again.",
-        variant: "destructive",
-      });
+      // Error handling is done in the hook
     } finally {
       setIsExporting(false);
     }
