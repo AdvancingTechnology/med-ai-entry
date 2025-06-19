@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
 import {
@@ -33,7 +32,7 @@ const items = [
   },
   {
     title: "Talk & Train",
-    url: "/train-dashboard",
+    url: "/voice-training",
     icon: MessageSquare,
   },
   {
