@@ -1,6 +1,6 @@
 
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import {
   Sidebar,
   SidebarContent,
@@ -72,8 +72,8 @@ const SidebarNavigation = () => {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a 
-                      href={item.url} 
+                    <Link 
+                      to={item.url} 
                       className={`
                         flex items-center gap-3 px-2 py-3 rounded-lg transition-colors text-softblue-800 relative
                         ${isActive(item.url) 
@@ -93,7 +93,7 @@ const SidebarNavigation = () => {
                       {isActive(item.url) && (
                         <div className="absolute bottom-0 left-2 right-2 h-0.5 bg-softblue-600 rounded-full" />
                       )}
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

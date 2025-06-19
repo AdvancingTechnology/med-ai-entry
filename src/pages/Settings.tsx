@@ -1,10 +1,11 @@
-
 import React, { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
-import { Settings as SettingsIcon } from "lucide-react";
+import { Settings as SettingsIcon, ArrowLeft, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const TONES = [
   { key: "friendly", label: "Friendly" },
@@ -38,6 +39,8 @@ const defaultSettings = {
 };
 
 const Settings: React.FC = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
   const [tones, setTones] = useState(defaultSettings.tones);
   const [voiceStyle, setVoiceStyle] = useState(defaultSettings.voiceStyle);
   const [sessionTiming, setSessionTiming] = useState(defaultSettings.sessionTiming);
@@ -45,26 +48,49 @@ const Settings: React.FC = () => {
   const handleToneToggle = (key: string) => {
     setTones((prev) => ({ ...prev, [key]: !prev[key as keyof typeof prev] }));
   };
+
   const handleSave = () => {
-    window.alert("Settings saved! (You'd typically persist these settings)");
+    toast({
+      title: "Settings Saved!",
+      description: "Your AI assistant settings have been updated successfully.",
+      variant: "default"
+    });
   };
+
   const handleReset = () => {
     setTones(defaultSettings.tones);
     setVoiceStyle(defaultSettings.voiceStyle);
     setSessionTiming(defaultSettings.sessionTiming);
+    toast({
+      title: "Settings Reset",
+      description: "All settings have been restored to default values.",
+      variant: "default"
+    });
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-softblue-50 px-2 py-8">
       <div className="w-full max-w-2xl flex items-center mb-6">
-        <Button variant="ghost" className="rounded-full mr-4" asChild>
-          <a href="/dashboard">&larr; Back to Dashboard</a>
+        <Button 
+          variant="ghost" 
+          className="rounded-full mr-4" 
+          onClick={() => navigate("/dashboard")}
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back to Dashboard
         </Button>
-        <h1 className="text-2xl font-bold text-softblue-800 flex-1 text-center flex items-center gap-2">
+        <h1 className="text-2xl font-bold text-softblue-800 flex-1 text-center flex items-center justify-center gap-2">
           <SettingsIcon size={24} className="text-softblue-400" />
           AI Assistant Settings
         </h1>
-        <div className="w-32" />
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/dashboard")}
+          className="rounded-full"
+        >
+          <Home size={18} className="text-softblue-700" />
+        </Button>
       </div>
       <form className="w-full max-w-2xl space-y-6" onSubmit={e => {e.preventDefault(); handleSave();}}>
         <Card className="rounded-2xl border-softblue-200">

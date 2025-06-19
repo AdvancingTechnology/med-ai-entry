@@ -1,11 +1,11 @@
-
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@/components/ui/table";
-import { PlusCircle, UserCheck, Stethoscope, Video } from "lucide-react";
+import { PlusCircle, UserCheck, Stethoscope, Video, ArrowLeft, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const DEMO_SIMULATIONS = [
   {
@@ -31,19 +31,42 @@ const DEMO_SIMULATIONS = [
 export default function TrainingDashboard() {
   const [showSimModal, setShowSimModal] = useState(false);
   const navigate = useNavigate();
+  const { toast } = useToast();
   const aiConfidence = 85; // Placeholder value for AI readiness
+
+  const handleViewNotifications = () => {
+    toast({
+      title: "Notifications",
+      description: "No new notifications at this time.",
+      variant: "default"
+    });
+  };
+
+  const handleAISettings = () => {
+    navigate("/settings");
+  };
 
   return (
     <div className="min-h-screen bg-softblue-50 pb-12 px-2 pt-8 flex flex-col items-center animate-fade-in">
       <div className="w-full max-w-4xl flex flex-col md:flex-row items-center justify-between mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-softblue-800 flex items-center gap-2">
-            <UserCheck className="text-softblue-400" size={32} />
-            AI Training Dashboard
-          </h1>
-          <p className="mt-2 text-softblue-700 max-w-lg">
-            Manage your simulation sessions and monitor your AI training progress.
-          </p>
+        <div className="flex items-center gap-4 mb-4 md:mb-0">
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/dashboard")}
+            className="rounded-full"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Dashboard
+          </Button>
+          <div>
+            <h1 className="text-3xl font-bold text-softblue-800 flex items-center gap-2">
+              <UserCheck className="text-softblue-400" size={32} />
+              AI Training Dashboard
+            </h1>
+            <p className="mt-2 text-softblue-700 max-w-lg">
+              Manage your simulation sessions and monitor your AI training progress.
+            </p>
+          </div>
         </div>
         <div className="flex flex-col md:flex-row gap-3 mt-4 md:mt-0">
           <Button
@@ -123,14 +146,14 @@ export default function TrainingDashboard() {
               <Button
                 variant="ghost"
                 className="text-softblue-700 hover:bg-softblue-100"
-                onClick={() => navigate("/notifications")}
+                onClick={handleViewNotifications}
               >
                 View Notifications
               </Button>
               <Button
                 variant="ghost"
                 className="text-softblue-700 hover:bg-softblue-100"
-                onClick={() => navigate("/settings")}
+                onClick={handleAISettings}
               >
                 AI Agent Settings
               </Button>

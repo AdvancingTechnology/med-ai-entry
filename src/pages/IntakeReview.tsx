@@ -1,9 +1,9 @@
-
 import React, { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Play } from "lucide-react";
+import { ArrowLeft, Play, Home } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const PATIENT_DATA = {
   name: "Melissa Carter",
@@ -56,6 +56,7 @@ const TRANSCRIPT = [
 
 const IntakeReview: React.FC = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
   const [playingIndex, setPlayingIndex] = useState<number | null>(null);
 
@@ -73,6 +74,30 @@ const IntakeReview: React.FC = () => {
     audio.onerror = () => setPlayingIndex(null);
   };
 
+  const handleRequestClarification = () => {
+    toast({
+      title: "Clarification Requested",
+      description: "AI has been notified to provide additional details about this case.",
+      variant: "default"
+    });
+  };
+
+  const handleMarkFollowUp = () => {
+    toast({
+      title: "Follow-up Scheduled",
+      description: "Patient has been marked for follow-up consultation.",
+      variant: "default"
+    });
+  };
+
+  const handleSendToChart = () => {
+    toast({
+      title: "Success!",
+      description: "Patient data has been successfully sent to chart.",
+      variant: "default"
+    });
+  };
+
   return (
     <div className="min-h-screen bg-softblue-50 py-6 px-2 flex flex-col items-center">
       {/* Top bar */}
@@ -88,8 +113,14 @@ const IntakeReview: React.FC = () => {
         <h1 className="text-2xl font-bold text-softblue-800 flex-1 text-center">
           Patient Intake Review
         </h1>
-        {/* Spacer */}
-        <div className="w-28" />
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate("/dashboard")}
+          className="rounded-full"
+        >
+          <Home size={18} className="text-softblue-700" />
+        </Button>
       </div>
 
       <Card className="w-full max-w-3xl rounded-2xl border-softblue-200 shadow mb-6">
@@ -143,13 +174,25 @@ const IntakeReview: React.FC = () => {
 
       {/* Actions */}
       <div className="w-full max-w-3xl flex flex-col md:flex-row gap-4 justify-end">
-        <Button variant="outline" className="flex-1 md:flex-none rounded-lg border-softblue-300 text-softblue-700">
+        <Button 
+          variant="outline" 
+          className="flex-1 md:flex-none rounded-lg border-softblue-300 text-softblue-700"
+          onClick={handleRequestClarification}
+        >
           Request Clarification from AI
         </Button>
-        <Button variant="secondary" className="flex-1 md:flex-none rounded-lg bg-yellow-100 hover:bg-yellow-200 text-yellow-800 border border-yellow-300">
+        <Button 
+          variant="secondary" 
+          className="flex-1 md:flex-none rounded-lg bg-yellow-100 hover:bg-yellow-200 text-yellow-800 border border-yellow-300"
+          onClick={handleMarkFollowUp}
+        >
           Mark for Follow-up
         </Button>
-        <Button variant="default" className="flex-1 md:flex-none rounded-lg bg-softblue-600 hover:bg-softblue-700 text-white font-semibold">
+        <Button 
+          variant="default" 
+          className="flex-1 md:flex-none rounded-lg bg-softblue-600 hover:bg-softblue-700 text-white font-semibold"
+          onClick={handleSendToChart}
+        >
           Send to Chart
         </Button>
       </div>
