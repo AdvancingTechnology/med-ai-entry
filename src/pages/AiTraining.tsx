@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -108,8 +107,32 @@ export default function AiTraining() {
 
   const handleConfirmFinalize = () => {
     setFinalDialogOpen(false);
-    setToastMsg("AI Training finalized!");
-    setTimeout(() => navigate("/dashboard"), 1200);
+    
+    // Send data to API endpoint
+    fetch('/api/training', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        hpiSample: hpiSamples,
+        actions: actions.filter(action => action.trim().length > 0),
+      }),
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setToastMsg("AI Training finalized!");
+        setTimeout(() => navigate("/dashboard"), 1200);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        setToastMsg("Error saving training data");
+      });
   };
 
   // Dynamic preview summary based on current state
@@ -131,7 +154,7 @@ export default function AiTraining() {
               Train Your AI Assistant
             </h1>
             <p className="mt-2 text-softblue-700 text-base max-w-xl">
-              Here, you’ll teach the AI your unique medical decision-making style by entering examples of patient HPIs (History of Present Illness) and typical responses/actions you'd take.
+              Here, you'll teach the AI your unique medical decision-making style by entering examples of patient HPIs (History of Present Illness) and typical responses/actions you'd take.
             </p>
           </div>
           <Button
@@ -223,7 +246,7 @@ export default function AiTraining() {
                       </TooltipTrigger>
                       <TooltipContent>
                         What type of responses should I add? <br />
-                        Describe typical next steps you’d take for your most common patient scenarios.
+                        Describe typical next steps you'd take for your most common patient scenarios.
                       </TooltipContent>
                     </Tooltip>
                     {actions.map((value, idx) => (
