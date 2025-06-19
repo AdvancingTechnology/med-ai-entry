@@ -20,7 +20,21 @@ export default function TrainingDashboard() {
   const saveSession = async () => {
     if (!hpi.trim()) return toast({ title: "Enter an HPI first", variant: "destructive" });
     try {
-      await send({ hpiSample: hpi, actions });
+      const response = await fetch('/api/training', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          hpiSample: hpi,
+          actions: actions.filter(action => action.trim().length > 0),
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
       toast({ title: "Sample saved!" });
       setHpi("");
       setActions([""]);
