@@ -19,8 +19,10 @@ export default function TrainingDashboard() {
 
   const saveSession = async () => {
     if (!hpi.trim()) return toast({ title: "Enter an HPI first", variant: "destructive" });
+    
     try {
-      const response = await fetch('/api/training', {
+      // First, save to our API
+      const apiResponse = await fetch('/api/training', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,11 +33,17 @@ export default function TrainingDashboard() {
         }),
       });
       
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+      if (!apiResponse.ok) {
+        throw new Error('API response was not ok');
       }
       
-      toast({ title: "Sample saved!" });
+      // Then, send to n8n webhook
+      await send({
+        hpiSample: hpi,
+        actions: actions.filter(action => action.trim().length > 0),
+      });
+      
+      toast({ title: "Training session saved!" });
       setHpi("");
       setActions([""]);
     } catch (e) {
