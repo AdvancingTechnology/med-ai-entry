@@ -19,7 +19,7 @@ const ChatVoicePanel = () => {
   const [transcript, setTranscript] = useState<TranscriptItem[]>([]);
   const [textInput, setTextInput] = useState('');
   const [isRecognitionSupported, setIsRecognitionSupported] = useState(false);
-  const recognitionRef = useRef<SpeechRecognition | null>(null);
+  const recognitionRef = useRef<any>(null);
   const transcriptEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 

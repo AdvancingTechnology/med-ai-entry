@@ -39,7 +39,7 @@ const emrTargets = [
 const ExportModal: React.FC<ExportModalProps> = ({ isOpen, onClose, sessionData }) => {
   const [selectedTarget, setSelectedTarget] = useState<string>("");
   const [isExporting, setIsExporting] = useState(false);
-  const { sendToExportWebhook } = useWebhookIntegration();
+  const { send: sendToExportWebhook } = useWebhookIntegration("export-event");
 
   const handleExport = async () => {
     if (!selectedTarget) {
